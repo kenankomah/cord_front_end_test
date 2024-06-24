@@ -9,11 +9,26 @@ interface SearchFiltersContProps {
 	marginBottom?: boolean;
 }
 
+interface Genres {
+	id: number;
+	name: string;
+}
+
+interface Ratings {
+	id: number;
+	name: number;
+}
+
+interface Languages {
+	id: string;
+	name: string;
+}
+
 interface SearchFiltersProps {
-	genres: [];
-	ratings: [];
-	languages: [];
-	searchMovies: () => void;
+	genres: Genres[];
+	ratings: Ratings[];
+	languages: Languages[];
+	searchMovies: (keyword: string, year: string) => Promise<void>;
 }
 
 export default class SearchFilters extends React.Component<SearchFiltersProps> {
@@ -29,7 +44,10 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 				<SearchFiltersCont>
 					<CategoryTitle>Movies</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
-					<ExpandableFilters />
+					<ExpandableFilters
+						title=""
+						filters={[{ name: "1", id: 1 }]}
+					/>
 				</SearchFiltersCont>
 			</FiltersWrapper>
 		);
