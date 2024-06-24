@@ -25,6 +25,7 @@ export default class MovieList extends React.Component<MovieListProps> {
 		return (
 			<MoviesWrapper>
 				{/* Finish the MovieItem component and use it here to display the movie results */}
+				Movie List
 			</MoviesWrapper>
 		);
 	}

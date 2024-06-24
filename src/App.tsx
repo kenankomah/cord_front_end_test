@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SideNavBar from "./components/sidenavbar";
 import Discover from "./pages/discover";
 
-import "./App.css";
+import "../src/css/app.scss";
 
 export default class App extends React.Component {
 	render() {
