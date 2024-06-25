@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import * as colors from "../../colors";
@@ -6,13 +6,20 @@ import * as fetcher from "../../fetcher";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
+import { movieResultsType } from "../../types";
+
+interface apiResponseType {
+	page: number;
+	results: movieResultsType[];
+}
 
 export default function Discover() {
 	// You don't need to keep the current structure of this state object. Feel free to restructure it as needed.
+	const [results, setResults] = useState<movieResultsType[]>([]);
 	const [state] = useState({
 		keyword: "",
 		year: 0,
-		results: [],
+		// results: [],
 		movieDetails: null,
 		totalCount: 0,
 		genreOptions: [],
@@ -32,6 +39,31 @@ export default function Discover() {
 		],
 	});
 
+	const [errorStatus, setErrorStatus] = useState(false);
+	const MOVIE_DATA_API_KEY = process.env.REACT_APP_MOVIE_DATA_API_KEY;
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const response = await fetch(
+					`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${MOVIE_DATA_API_KEY}`
+				);
+
+				if (!response.ok) {
+					setErrorStatus(errorStatus);
+					throw new Error("Network response was not ok");
+				}
+				const data = await response.json();
+				setResults(data.results);
+				console.log("data", data);
+			} catch (error) {
+				setErrorStatus(true);
+				console.error(error);
+			}
+		}
+		fetchData();
+	}, [errorStatus]);
+
 	// Write a function to preload the popular movies when page loads & get the movie genres
 
 	// Write a function to get the movie details based on the movie id taken from the URL.
@@ -45,7 +77,7 @@ export default function Discover() {
 		languageOptions,
 		ratingOptions,
 		totalCount,
-		results,
+		// results,
 		movieDetails,
 	} = state;
 

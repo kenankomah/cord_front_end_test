@@ -3,9 +3,21 @@ import styled from "styled-components";
 
 import MovieItem from "../movieitem";
 
-interface Movie {
+interface MovieResultsType {
+	adult: false;
+	backdrop_path: string;
+	genre_ids: number[];
 	id: number;
+	original_language: string;
+	original_title: string;
+	overview: string;
+	popularity: number;
+	poster_path: string;
+	release_date: string;
 	title: string;
+	video: false;
+	vote_average: number;
+	vote_count: number;
 }
 
 interface Genre {
@@ -14,21 +26,19 @@ interface Genre {
 }
 
 interface MovieListProps {
-	movies: Movie[];
+	movies: MovieResultsType[];
 	genres: Genre[];
 }
 
-export default class MovieList extends React.Component<MovieListProps> {
-	render() {
-		const { movies, genres } = this.props;
+export default function MovieList(props: MovieListProps) {
+	const { movies, genres } = props;
 
-		return (
-			<MoviesWrapper>
-				{/* Finish the MovieItem component and use it here to display the movie results */}
-				Movie List
-			</MoviesWrapper>
-		);
-	}
+	return (
+		<MoviesWrapper>
+			{/* Finish the MovieItem component and use it here to display the movie results */}
+			Movie List
+		</MoviesWrapper>
+	);
 }
 
 const MoviesWrapper = styled.div`
