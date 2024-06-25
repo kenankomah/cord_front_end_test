@@ -37,7 +37,6 @@ export default class SideNavBar extends React.Component {
 					to="/discover"
 					activeClassName="active"
 				>
-					Discover
 					<NavIcon search></NavIcon>
 				</SideNavMainLink>
 				<SideNavHeader>

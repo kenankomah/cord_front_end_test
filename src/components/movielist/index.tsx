@@ -37,7 +37,6 @@ export default function MovieList(props: MovieListProps) {
 	return (
 		<MoviesWrapper>
 			{/* Finish the MovieItem component and use it here to display the movie results */}
-			Movie List
 			{movies.map((movie) => (
 				<MovieItem key={movie.id} movie={movie} />
 			))}
