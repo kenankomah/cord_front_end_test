@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import MovieItem from "../movieitem";
 
-interface MovieResultsType {
+interface MovieData {
 	adult: false;
 	backdrop_path: string;
 	genre_ids: number[];
@@ -20,24 +20,29 @@ interface MovieResultsType {
 	vote_count: number;
 }
 
+interface MovieResultsType {
+	results: MovieData[];
+}
+
 interface Genre {
 	id: number;
 	name: string;
 }
 
 interface MovieListProps {
-	movies: MovieResultsType[];
+	movies: MovieResultsType;
 	genres: Genre[];
 }
 
 export default function MovieList(props: MovieListProps) {
 	const { movies, genres } = props;
+
 	console.log("movies", movies);
 
 	return (
 		<MoviesWrapper>
 			{/* Finish the MovieItem component and use it here to display the movie results */}
-			{movies.map((movie) => (
+			{movies.results?.map((movie) => (
 				<MovieItem key={movie.id} movie={movie} />
 			))}
 		</MoviesWrapper>
