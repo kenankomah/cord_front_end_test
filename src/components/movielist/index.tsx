@@ -32,11 +32,15 @@ interface MovieListProps {
 
 export default function MovieList(props: MovieListProps) {
 	const { movies, genres } = props;
+	console.log("movies", movies);
 
 	return (
 		<MoviesWrapper>
 			{/* Finish the MovieItem component and use it here to display the movie results */}
 			Movie List
+			{movies.map((movie) => (
+				<MovieItem key={movie.id} movie={movie} />
+			))}
 		</MoviesWrapper>
 	);
 }
