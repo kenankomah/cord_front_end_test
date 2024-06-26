@@ -51,13 +51,9 @@ export default function Discover() {
 	const { data: genreOptions } = useFetch(genreListUrl);
 	const { data: results, setData: setResults } = useFetch(movieListUrl);
 
-	console.log("resultsresults", results);
-
 	// Write a function to preload the popular movies when page loads & get the movie genres
 
 	// Write a function to get the movie details based on the movie id taken from the URL.
-
-	console.log("movieListUrl", movieListUrl);
 
 	const searchMovies = async (keyword: string, year: string) => {
 		// Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
@@ -67,6 +63,8 @@ export default function Discover() {
 	};
 
 	searchMovies(" ", "2021");
+
+	console.log("genreOptions", genreOptions);
 
 	const { languageOptions, ratingOptions, totalCount, movieDetails } = state;
 
