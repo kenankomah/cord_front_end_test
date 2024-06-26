@@ -18,6 +18,7 @@ export default function Discover() {
 	// You don't need to keep the current structure of this state object. Feel free to restructure it as needed.
 
 	const [errorStatus, setErrorStatus] = useState<boolean>(false);
+
 	const [state] = useState({
 		keyword: "",
 		year: 0,
@@ -40,21 +41,32 @@ export default function Discover() {
 		],
 	});
 
+	let year = new Date().getFullYear();
+
 	const MOVIE_DATA_API_KEY = process.env.REACT_APP_MOVIE_DATA_API_KEY;
 
-	const movieListUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${MOVIE_DATA_API_KEY}`;
 	const genreListUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${MOVIE_DATA_API_KEY}`;
+	let movieListUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&primary_release_year=${year}&api_key=${MOVIE_DATA_API_KEY}`;
 
 	const { data: genreOptions } = useFetch(genreListUrl);
-	const { data: results } = useFetch(movieListUrl);
+	const { data: results, setData: setResults } = useFetch(movieListUrl);
+
+	console.log("resultsresults", results);
 
 	// Write a function to preload the popular movies when page loads & get the movie genres
 
 	// Write a function to get the movie details based on the movie id taken from the URL.
 
+	console.log("movieListUrl", movieListUrl);
+
 	const searchMovies = async (keyword: string, year: string) => {
 		// Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
+		const selectedYear = parseInt(year);
+
+		// setApiResponse(null);
 	};
+
+	searchMovies(" ", "2021");
 
 	const { languageOptions, ratingOptions, totalCount, movieDetails } = state;
 
@@ -75,7 +87,11 @@ export default function Discover() {
 				{totalCount > 0 && (
 					<TotalCounter>{totalCount} results</TotalCounter>
 				)}
-				<MovieList movies={results || []} genres={genreOptions || []} />
+				<MovieList
+					movies={results || []}
+					genres={genreOptions || []}
+					setResults={setResults}
+				/>
 				{/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
 			</MovieResults>
 		</DiscoverWrapper>
@@ -84,6 +100,8 @@ export default function Discover() {
 
 const DiscoverWrapper = styled.div`
 	padding: 60px 35px;
+	display: flex;
+	flex-direction: row-reverse;
 `;
 
 const TotalCounter = styled.div`
@@ -94,4 +112,6 @@ const MovieResults = styled.div``;
 
 const MovieFilters = styled.div``;
 
-const MobilePageTitle = styled.header``;
+const MobilePageTitle = styled.header`
+	display: none;
+`;

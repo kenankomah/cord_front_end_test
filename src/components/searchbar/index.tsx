@@ -5,8 +5,6 @@ import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
 
-export default class SearchBar extends React.Component {
-	render() {
-		return <input type="text" placeholder="Search for movies" />;
-	}
+export default function SearchBar() {
+	return <input type="text" placeholder="Search for movies" />;
 }

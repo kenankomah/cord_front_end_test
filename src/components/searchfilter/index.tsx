@@ -42,7 +42,7 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 					<SearchBar />
 				</SearchFiltersCont>
 				<SearchFiltersCont>
-					<CategoryTitle>Movies</CategoryTitle>
+					<CategoryTitle>Movie</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
 					<ExpandableFilters
 						title=""

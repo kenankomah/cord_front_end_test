@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import MovieItem from "../movieitem";
@@ -32,23 +32,60 @@ interface Genre {
 interface MovieListProps {
 	movies: MovieResultsType;
 	genres: Genre[];
+	setResults: any;
 }
 
 export default function MovieList(props: MovieListProps) {
-	const { movies, genres } = props;
+	const { movies, setResults } = props;
+	const [inputValue, setInputValue] = useState("");
+	const originalMoviesRef = useRef<MovieResultsType>({ results: [] });
 
-	console.log("movies", movies);
+	useEffect(() => {
+		if (movies?.results?.length === 20) {
+			originalMoviesRef.current = movies;
+		}
+	}, [movies]);
+
+	useEffect(() => {
+		const handleInputChange = (event: any) => {
+			setInputValue(event.target.value);
+		};
+
+		const inputElement = document.querySelector("input");
+		inputElement?.addEventListener("input", handleInputChange);
+
+		return () => {
+			inputElement?.removeEventListener("input", handleInputChange);
+		};
+	}, []);
+
+	useEffect(() => {
+		const filter = originalMoviesRef.current?.results?.filter(
+			(movie: { title: string }) =>
+				movie.title.toLowerCase().includes(inputValue.toLowerCase())
+		);
+
+		if (originalMoviesRef.current) {
+			const updatedMovies = {
+				...originalMoviesRef.current,
+				results: filter || [],
+			};
+			setResults(updatedMovies);
+		}
+	}, [inputValue]);
+
+	if (!movies) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<MoviesWrapper>
-			{/* Finish the MovieItem component and use it here to display the movie results */}
 			{movies.results?.map((movie) => (
 				<MovieItem key={movie.id} movie={movie} />
 			))}
 		</MoviesWrapper>
 	);
 }
-
 const MoviesWrapper = styled.div`
 	position: relative;
 `;

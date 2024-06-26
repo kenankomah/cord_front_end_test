@@ -21,7 +21,7 @@ const useFetch = (url: string) => {
 		})();
 	}, []);
 
-	return { data, error };
+	return { data, error, setData };
 };
 
 export default useFetch;
