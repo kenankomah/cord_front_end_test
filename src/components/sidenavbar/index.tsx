@@ -90,6 +90,10 @@ const SideNavBarCont = styled.div`
 	width: 280px;
 	height: 100%;
 	background-color: ${colors.sideNavBar};
+	display: block;
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 const SideNavMainLink = styled(Link)`

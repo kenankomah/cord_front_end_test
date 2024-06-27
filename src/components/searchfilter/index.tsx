@@ -7,6 +7,7 @@ import SearchBar from "../searchbar";
 
 interface SearchFiltersContProps {
 	marginBottom?: boolean;
+	filters?: boolean;
 }
 
 interface Genres {
@@ -35,12 +36,9 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 	render() {
 		const { genres, ratings, languages, searchMovies } = this.props;
 
-		console.log("ratings", ratings);
 		const reformattedLanguages = languages?.map((language) => {
 			return { id: language.iso_639_1, name: language.english_name };
 		});
-
-		console.log("reformattedLanguages", reformattedLanguages);
 
 		return (
 			<FiltersWrapper>
@@ -48,7 +46,7 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 					{/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
 					<SearchBar />
 				</SearchFiltersCont>
-				<SearchFiltersCont>
+				<SearchFiltersCont filters>
 					<CategoryTitle>Movie</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
 					<ExpandableFilters
@@ -56,7 +54,7 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 						filters={genres}
 					/>
 					<ExpandableFilters
-						title="select Language"
+						title="Select Language"
 						filters={reformattedLanguages}
 					/>
 					<ExpandableFilters
@@ -78,13 +76,22 @@ const SearchFiltersCont = styled.div<SearchFiltersContProps>`
 	padding: 20px;
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
-	border: 1px solid black;
 
 	${(props) =>
 		props.marginBottom &&
 		css`
 			margin-bottom: 15px;
 		`}
+
+	${(props) =>
+		props.filters &&
+		css`
+			@media (max-width: 768px) {
+				display: none;
+			}
+		`}
 `;
 
-const CategoryTitle = styled.div``;
+const CategoryTitle = styled.div`
+	display: block;
+`;

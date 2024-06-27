@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Checkbox from "../checkbox";
+import PlusIcon from "../../images/plus_icon.svg";
+import MinusIcon from "../../images/minus_icon.svg";
 
 interface ExpandableFiltersProps {
 	title: string;
@@ -16,15 +18,15 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
 	filters,
 }) => {
 	const [filtersShown, setFiltersShown] = useState<boolean>(false);
-	const filterSign = filtersShown ? "  -  " : "  +  ";
+	const filterSign = filtersShown ? MinusIcon : PlusIcon;
 
 	return (
 		<ExpandableFiltersCont>
 			<ExpandableFiltersHeader
 				onClick={() => setFiltersShown(!filtersShown)}
 			>
-				{filterSign}
-				{title}
+				<img style={{ width: "25px" }} src={filterSign} alt="" />
+				<TitleStyle>{title}</TitleStyle>
 			</ExpandableFiltersHeader>
 			{filtersShown && (
 				<ExpandableFiltersBody>
@@ -37,11 +39,17 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
 	);
 };
 
+const TitleStyle = styled.h3`
+	margin-left: 10px;
+`;
+
 const ExpandableFiltersCont = styled.div`
 	position: relative;
 `;
 
 const ExpandableFiltersHeader = styled.div`
+	display: flex;
+	align-items: center;
 	cursor: pointer;
 `;
 

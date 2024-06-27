@@ -20,5 +20,13 @@ textarea {
 
 .active {
 	color: #fff;
-	background-color: #cccc00;
+	background-color: #d9e021;
+}
+
+.poster {
+	width: 100%;
+
+	@media (max-width: 768px) {
+		height: unset !important;
+	}
 }

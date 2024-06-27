@@ -43,7 +43,12 @@ export default function MovieItem({ movie }: any) {
 				<img
 					src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
 					alt="poster"
-					style={{ height: "100%" }}
+					className="poster"
+					style={{
+						height: "100%",
+						width: "100%",
+						objectFit: "cover",
+					}}
 				/>
 			</LeftCont>
 			<RightCont>
@@ -64,7 +69,9 @@ export default function MovieItem({ movie }: any) {
 	);
 }
 
-const ReleaseDate = styled.div``;
+const ReleaseDate = styled.div`
+	margin-top: 20px;
+`;
 
 const Genre = styled.h3`
 	color: #000;
@@ -81,7 +88,10 @@ const MovieItemWrapper = styled.div`
 	border-radius: 3px;
 	margin-bottom: 15px;
 	padding: 20px;
-	border: 1px solid black;
+
+	@media (max-width: 768px) {
+		grid-template-columns: 100px 2fr;
+	}
 `;
 
 const Ratings = styled.div`
@@ -93,6 +103,7 @@ const Title = styled.h2`
 	color: #000;
 	font-size: 20px;
 	font-weight: bold;
+	margin: 0;
 `;
 
 const TitleDiv = styled.div`
@@ -117,4 +128,20 @@ const RightCont = styled.div`
 	justify-content: space-between;
 `;
 
-const Overview = styled.div``;
+const Overview = styled.div`
+	position: relative;
+	overflow: hidden;
+
+	@media (max-width: 768px) {
+		height: 80px;
+		&::before {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: linear-gradient(transparent 40px, white);
+		}
+	}
+`;

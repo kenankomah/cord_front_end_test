@@ -7,11 +7,18 @@ import * as fetcher from "../../fetcher";
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import { movieResultsType } from "../../types";
+
 import useFetch from "./useFetch";
+
+import HamburgerIcon from "../../images/hamburger_icon.png";
 
 interface apiResponseType {
 	page: number;
 	results: movieResultsType[];
+}
+
+interface resultProp {
+	desktop?: boolean;
 }
 
 export default function Discover() {
@@ -58,8 +65,6 @@ export default function Discover() {
 	const movieListUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&primary_release_year=${year}&api_key=${MOVIE_DATA_API_KEY}`;
 	const languagesUrl = `https://api.themoviedb.org/3/configuration/languages?api_key=${MOVIE_DATA_API_KEY}`;
 
-	console.log("languagesUrl", useFetch(languagesUrl));
-
 	const { data: genreOptions } = useFetch(genreListUrl);
 	const { data: results, setData: setResults } = useFetch(movieListUrl);
 	const { data: languageOptions } = useFetch(languagesUrl);
@@ -82,7 +87,10 @@ export default function Discover() {
 
 	return (
 		<div>
-			{results?.total_results?.toLocaleString("en") + " movies"}
+			<Hamburger></Hamburger>
+			<Results desktop>
+				{results?.total_results?.toLocaleString("en") + " movies"}
+			</Results>
 			<DiscoverWrapper>
 				<MobilePageTitle>Discover</MobilePageTitle>
 				<MovieFilters>
@@ -94,11 +102,12 @@ export default function Discover() {
 							searchMovies(keyword, year)
 						}
 					/>
+					<Results>
+						{results?.total_results?.toLocaleString("en") +
+							" movies"}
+					</Results>
 				</MovieFilters>
 				<MovieResults>
-					{/* {totalCount > 0 && (
-						<TotalCounter>{totalCount} results</TotalCounter>
-					)} */}
 					<MovieList
 						movies={results || []}
 						genres={genreOptions || []}
@@ -111,22 +120,49 @@ export default function Discover() {
 	);
 }
 
+const Hamburger = styled.div`
+	background-image: url(${HamburgerIcon});
+	background-repeat: no-repeat;
+	background-position: 30px center;
+	background-size: 80%;
+	width: 40px;
+	height: 40px;
+	padding-left: 45px;
+	margin-top: 25px;
+	@media (min-width: 768px) {
+		display: none;
+	}
+`;
+
+const Results = styled.div<resultProp>`
+	margin: 20px 40px;
+	@media (max-width: 768px) {
+		display: ${(props) => (props.desktop ? "none" : "inline-block")};
+	}
+`;
+
 const DiscoverWrapper = styled.div`
-	padding: 60px 45px;
+	padding: 10px 45px;
 	display: flex;
 	flex-direction: row-reverse;
 	width: 100%;
 	box-sizing: border-box;
-`;
 
-const TotalCounter = styled.div`
-	font-weight: 900;
+	@media (max-width: 1200px) {
+		flex-direction: column;
+		padding: 10px 25px;
+	}
 `;
 
 const MovieResults = styled.div``;
 
 const MovieFilters = styled.div`
 	margin-left: 20px;
+
+	@media (max-width: 1200px) {
+		margin-left: 0;
+		margin-bottom: 20px;
+	}
 `;
 
 const MobilePageTitle = styled.header`
