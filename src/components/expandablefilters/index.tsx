@@ -5,7 +5,7 @@ import Checkbox from "../checkbox";
 
 interface ExpandableFiltersProps {
 	title: string;
-	filters: { id: number; name: string }[];
+	filters: { id: number | string; name: string | number }[];
 }
 
 // You need to create your own checkbox component with a custom checkmark
@@ -15,13 +15,15 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
 	title,
 	filters,
 }) => {
-	const [filtersShown, setFiltersShown] = useState<boolean>(true);
+	const [filtersShown, setFiltersShown] = useState<boolean>(false);
+	const filterSign = filtersShown ? "  -  " : "  +  ";
 
 	return (
 		<ExpandableFiltersCont>
 			<ExpandableFiltersHeader
 				onClick={() => setFiltersShown(!filtersShown)}
 			>
+				{filterSign}
 				{title}
 			</ExpandableFiltersHeader>
 			{filtersShown && (

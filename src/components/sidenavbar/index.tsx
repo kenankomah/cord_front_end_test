@@ -24,7 +24,7 @@ export default class SideNavBar extends React.Component {
 			<SideNavBarCont className={activeSideBar && "visible"}>
 				{/* Implement a hamburger icon slide in effect for mobile devices */}
 				<SideNavMainLink
-					className="menu_nav_link main_nav_link"
+					className="menu_nav_link"
 					to="/"
 					activeClassName="active"
 					exact
@@ -37,7 +37,10 @@ export default class SideNavBar extends React.Component {
 					to="/discover"
 					activeClassName="active"
 				>
-					<NavIcon search></NavIcon>
+					Discover
+					<NavIcon search>
+						<img src="/images/search-icon-white.png" />
+					</NavIcon>
 				</SideNavMainLink>
 				<SideNavHeader>
 					<HeaderText>Watched</HeaderText>

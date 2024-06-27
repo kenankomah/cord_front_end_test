@@ -2,18 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 interface CheckBoxProps {
-	label: string;
+	label: string | number;
 }
 
 export default function CheckBox(props: CheckBoxProps) {
-	// const [checked, setChecked] = useState(false);
-
 	const { label } = props;
 
-	// const handleCheck = () => {
-	// 	setChecked(!checked);
-	// };
-	console.log("label", label);
 	return (
 		<CheckboxCont>
 			<input type="checkbox" />

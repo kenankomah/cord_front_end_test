@@ -43,23 +43,28 @@ export default function MovieItem({ movie }: any) {
 				<img
 					src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
 					alt="poster"
+					style={{ height: "100%" }}
 				/>
 			</LeftCont>
 			<RightCont>
-				<TitleDiv>
-					<div>
-						<Title>{title}</Title>
-						<Genre>{genreNames}</Genre>
-					</div>
+				<div>
+					<TitleDiv>
+						<div>
+							<Title>{title}</Title>
+							<Genre>{genreNames}</Genre>
+						</div>
 
-					<Ratings>{vote_average.toFixed(1)}</Ratings>
-				</TitleDiv>
-				<Overview>{overview}</Overview>
-				{release_date}
+						<Ratings>{vote_average.toFixed(1)}</Ratings>
+					</TitleDiv>
+					<Overview>{overview}</Overview>
+				</div>
+				<ReleaseDate>{release_date} </ReleaseDate>
 			</RightCont>
 		</MovieItemWrapper>
 	);
 }
+
+const ReleaseDate = styled.div``;
 
 const Genre = styled.h3`
 	color: #000;
@@ -69,10 +74,14 @@ const Genre = styled.h3`
 
 const MovieItemWrapper = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 2fr;
+	grid-template-columns: 190px 2fr;
+	gap: 20px;
 	position: relative;
 	background-color: white;
 	border-radius: 3px;
+	margin-bottom: 15px;
+	padding: 20px;
+	border: 1px solid black;
 `;
 
 const Ratings = styled.div`
@@ -102,6 +111,10 @@ const LeftCont = styled.div`
 	display: inline-block;
 `;
 
-const RightCont = styled.div``;
+const RightCont = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
 
 const Overview = styled.div``;

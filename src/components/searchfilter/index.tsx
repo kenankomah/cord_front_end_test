@@ -20,8 +20,8 @@ interface Ratings {
 }
 
 interface Languages {
-	id: string;
-	name: string;
+	iso_639_1: string;
+	english_name: string;
 }
 
 interface SearchFiltersProps {
@@ -35,6 +35,13 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 	render() {
 		const { genres, ratings, languages, searchMovies } = this.props;
 
+		console.log("ratings", ratings);
+		const reformattedLanguages = languages?.map((language) => {
+			return { id: language.iso_639_1, name: language.english_name };
+		});
+
+		console.log("reformattedLanguages", reformattedLanguages);
+
 		return (
 			<FiltersWrapper>
 				<SearchFiltersCont className="search_inputs_cont" marginBottom>
@@ -45,12 +52,16 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 					<CategoryTitle>Movie</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
 					<ExpandableFilters
-						title="- Select Genre'(s)"
+						title="Select Genre'(s)"
 						filters={genres}
 					/>
 					<ExpandableFilters
-						title="- select Language"
-						filters={genres}
+						title="select Language"
+						filters={reformattedLanguages}
+					/>
+					<ExpandableFilters
+						title="Select Rating"
+						filters={ratings}
 					/>
 				</SearchFiltersCont>
 			</FiltersWrapper>
@@ -67,6 +78,7 @@ const SearchFiltersCont = styled.div<SearchFiltersContProps>`
 	padding: 20px;
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
+	border: 1px solid black;
 
 	${(props) =>
 		props.marginBottom &&
