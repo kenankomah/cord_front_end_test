@@ -69,30 +69,33 @@ export default function Discover() {
 	const { languageOptions, ratingOptions, totalCount, movieDetails } = state;
 
 	return (
-		<DiscoverWrapper>
-			<MobilePageTitle>Discover</MobilePageTitle>
-			<MovieFilters>
-				<SearchFilters
-					genres={genreOptions}
-					ratings={ratingOptions}
-					languages={languageOptions}
-					searchMovies={(keyword: string, year: string) =>
-						searchMovies(keyword, year)
-					}
-				/>
-			</MovieFilters>
-			<MovieResults>
-				{totalCount > 0 && (
-					<TotalCounter>{totalCount} results</TotalCounter>
-				)}
-				<MovieList
-					movies={results || []}
-					genres={genreOptions || []}
-					setResults={setResults}
-				/>
-				{/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
-			</MovieResults>
-		</DiscoverWrapper>
+		<div>
+			{results?.total_results?.toLocaleString("en") + " movies"}
+			<DiscoverWrapper>
+				<MobilePageTitle>Discover</MobilePageTitle>
+				<MovieFilters>
+					<SearchFilters
+						genres={genreOptions?.genres}
+						ratings={ratingOptions}
+						languages={languageOptions}
+						searchMovies={(keyword: string, year: string) =>
+							searchMovies(keyword, year)
+						}
+					/>
+				</MovieFilters>
+				<MovieResults>
+					{totalCount > 0 && (
+						<TotalCounter>{totalCount} results</TotalCounter>
+					)}
+					<MovieList
+						movies={results || []}
+						genres={genreOptions || []}
+						setResults={setResults}
+					/>
+					{/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+				</MovieResults>
+			</DiscoverWrapper>
+		</div>
 	);
 }
 

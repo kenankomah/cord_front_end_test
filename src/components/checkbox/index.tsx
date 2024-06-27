@@ -6,11 +6,30 @@ interface CheckBoxProps {
 }
 
 export default function CheckBox(props: CheckBoxProps) {
-	const [checked, setChecked] = useState(false);
+	// const [checked, setChecked] = useState(false);
 
-	return <CheckboxCont></CheckboxCont>;
+	const { label } = props;
+
+	// const handleCheck = () => {
+	// 	setChecked(!checked);
+	// };
+	console.log("label", label);
+	return (
+		<CheckboxCont>
+			<input type="checkbox" />
+			<LabelText>{label}</LabelText>
+		</CheckboxCont>
+	);
 }
 
 const CheckboxCont = styled.div`
 	position: relative;
+	&:checked {
+		background-color: #2196f3;
+	}
+`;
+const LabelText = styled.p`
+	margin-left: 5px;
+	margin-bottom: 6px;
+	display: inline-block;
 `;

@@ -45,8 +45,12 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 					<CategoryTitle>Movie</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
 					<ExpandableFilters
-						title=""
-						filters={[{ name: "1", id: 1 }]}
+						title="- Select Genre'(s)"
+						filters={genres}
+					/>
+					<ExpandableFilters
+						title="- select Language"
+						filters={genres}
 					/>
 				</SearchFiltersCont>
 			</FiltersWrapper>

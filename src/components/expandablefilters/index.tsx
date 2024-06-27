@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Checkbox from "../checkbox";
@@ -8,45 +8,32 @@ interface ExpandableFiltersProps {
 	filters: { id: number; name: string }[];
 }
 
-export default class ExpandableFilters extends React.Component<
-	ExpandableFiltersProps,
-	{ filtersShown: boolean }
-> {
-	constructor(props: ExpandableFiltersProps) {
-		super(props);
+// You need to create your own checkbox component with a custom checkmark
+// You can use the "Checkbox" component as a reference
 
-		this.state = {
-			filtersShown: false,
-		};
-	}
+const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
+	title,
+	filters,
+}) => {
+	const [filtersShown, setFiltersShown] = useState<boolean>(true);
 
-	// You need to create your own checkbox component with a custom checkmark
-	// You can use the "Checkbox" component as a reference
-	render() {
-		const { title, filters } = this.props;
-		const { filtersShown } = this.state;
-		return (
-			<ExpandableFiltersCont>
-				<ExpandableFiltersHeader
-					onClick={() =>
-						this.setState({
-							filtersShown: !filtersShown,
-						})
-					}
-				>
-					{title}
-				</ExpandableFiltersHeader>
-				{filtersShown && (
-					<ExpandableFiltersBody>
-						{filters.map((filter) => (
-							<Checkbox key={filter.id} label={filter.name} />
-						))}
-					</ExpandableFiltersBody>
-				)}
-			</ExpandableFiltersCont>
-		);
-	}
-}
+	return (
+		<ExpandableFiltersCont>
+			<ExpandableFiltersHeader
+				onClick={() => setFiltersShown(!filtersShown)}
+			>
+				{title}
+			</ExpandableFiltersHeader>
+			{filtersShown && (
+				<ExpandableFiltersBody>
+					{filters?.map((filter) => (
+						<Checkbox key={filter.id} label={filter.name} />
+					))}
+				</ExpandableFiltersBody>
+			)}
+		</ExpandableFiltersCont>
+	);
+};
 
 const ExpandableFiltersCont = styled.div`
 	position: relative;
@@ -60,3 +47,5 @@ const ExpandableFiltersBody = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
+export default ExpandableFilters;
