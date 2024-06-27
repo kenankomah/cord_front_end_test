@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 
 import * as colors from "../../colors";
+// import Arrow from "../../images/arrow-icon.png";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
@@ -18,6 +19,7 @@ export default class SideNavBar extends React.Component {
 	};
 
 	render() {
+		// console.log("Arrow", Arrow);
 		const { activeSideBar } = this.state;
 
 		return (
@@ -38,9 +40,7 @@ export default class SideNavBar extends React.Component {
 					activeClassName="active"
 				>
 					Discover
-					<NavIcon search>
-						<img src="/images/search-icon-white.png" />
-					</NavIcon>
+					<NavIcon search></NavIcon>
 				</SideNavMainLink>
 				<SideNavHeader>
 					<HeaderText>Watched</HeaderText>
@@ -99,9 +99,14 @@ const SideNavMainLink = styled(Link)`
 `;
 
 const NavIcon = styled.div<NavIconProps>`
+	background-image: url(${(props) => (props.arrow ? Arrow : SearchWhite)});
+	background-repeat: no-repeat;
 	position: absolute;
 	right: 35px;
-	top: 50%;
+	top: 55%;
+	transform: translateY(-50%);
+	height: 30px;
+	width: 30px;
 `;
 
 const SideNavHeader = styled.div``;
