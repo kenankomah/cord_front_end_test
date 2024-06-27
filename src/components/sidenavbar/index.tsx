@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 
 import * as colors from "../../colors";
-// import Arrow from "../../images/arrow-icon.png";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
@@ -19,7 +18,6 @@ export default class SideNavBar extends React.Component {
 	};
 
 	render() {
-		// console.log("Arrow", Arrow);
 		const { activeSideBar } = this.state;
 
 		return (
@@ -34,16 +32,18 @@ export default class SideNavBar extends React.Component {
 					Wesley
 					<NavIcon arrow></NavIcon>
 				</SideNavMainLink>
-				<SideNavMainLink
+				<SideNavBarText
 					className="menu_nav_link"
 					to="/discover"
 					activeClassName="active"
 				>
 					Discover
 					<NavIcon search></NavIcon>
-				</SideNavMainLink>
+				</SideNavBarText>
 				<SideNavHeader>
-					<HeaderText>Watched</HeaderText>
+					<HeaderText>
+						Watched <hr />
+					</HeaderText>
 				</SideNavHeader>
 				<NavLink
 					className="menu_nav_link"
@@ -60,7 +60,10 @@ export default class SideNavBar extends React.Component {
 					Tv Shows
 				</NavLink>
 				<SideNavHeader>
-					<HeaderText>Saved</HeaderText>
+					<HeaderText>
+						Saved
+						<hr />
+					</HeaderText>
 				</SideNavHeader>
 				<NavLink
 					className="menu_nav_link"
@@ -98,6 +101,15 @@ const SideNavMainLink = styled(Link)`
 	color: white;
 `;
 
+const SideNavBarText = styled(Link)`
+	position: relative;
+	display: block;
+	padding: 25px 35px;
+	font-size: 1.6em;
+	font-weight: 400;
+	color: white;
+`;
+
 const NavIcon = styled.div<NavIconProps>`
 	background-image: url(${(props) => (props.arrow ? Arrow : SearchWhite)});
 	background-repeat: no-repeat;
@@ -111,8 +123,21 @@ const NavIcon = styled.div<NavIconProps>`
 
 const SideNavHeader = styled.div``;
 
-const HeaderText = styled.div``;
+const HeaderText = styled.div`
+	position: relative;
+	display: block;
+	padding: 20px 35px;
+	font-size: 1.6em;
+	font-weight: 400;
+	color: white;
+`;
 
 const NavLink = styled(Link)`
 	display: block;
+	position: relative;
+	display: block;
+	padding: 5px 35px;
+	font-size: 1em;
+	font-weight: 400;
+	color: grey;
 `;
