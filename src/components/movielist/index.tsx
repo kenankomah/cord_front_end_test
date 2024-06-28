@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 
 import MovieItem from "../movieitem";
+import { MoviesWrapper } from "./styles";
 
 interface MovieData {
 	adult: false;
@@ -86,6 +86,3 @@ export default function MovieList(props: MovieListProps) {
 		</MoviesWrapper>
 	);
 }
-const MoviesWrapper = styled.div`
-	position: relative;
-`;

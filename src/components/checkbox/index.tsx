@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import { CheckboxCont, LabelText } from "./styles";
 
 interface CheckBoxProps {
 	label: string | number;
@@ -15,15 +14,3 @@ export default function CheckBox(props: CheckBoxProps) {
 		</CheckboxCont>
 	);
 }
-
-const CheckboxCont = styled.div`
-	position: relative;
-	&:checked {
-		background-color: #2196f3;
-	}
-`;
-const LabelText = styled.p`
-	margin-left: 5px;
-	margin-bottom: 6px;
-	display: inline-block;
-`;
