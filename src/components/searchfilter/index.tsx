@@ -46,7 +46,7 @@ export default class SearchFilters extends React.Component<SearchFiltersProps> {
 					{/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
 					<SearchBar />
 				</SearchFiltersCont>
-				<SearchFiltersCont filters>
+				<SearchFiltersCont filters className="filtersContainer">
 					<CategoryTitle>Movie</CategoryTitle>
 					{/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
 					<ExpandableFilters

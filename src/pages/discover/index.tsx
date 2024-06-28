@@ -10,8 +10,6 @@ import { movieResultsType } from "../../types";
 
 import useFetch from "./useFetch";
 
-import HamburgerIcon from "../../images/hamburger_icon.png";
-
 interface apiResponseType {
 	page: number;
 	results: movieResultsType[];
@@ -87,7 +85,6 @@ export default function Discover() {
 
 	return (
 		<div>
-			<Hamburger></Hamburger>
 			<Results desktop>
 				{results?.total_results?.toLocaleString("en") + " movies"}
 			</Results>
@@ -120,20 +117,6 @@ export default function Discover() {
 	);
 }
 
-const Hamburger = styled.div`
-	background-image: url(${HamburgerIcon});
-	background-repeat: no-repeat;
-	background-position: 30px center;
-	background-size: 80%;
-	width: 40px;
-	height: 40px;
-	padding-left: 45px;
-	margin-top: 25px;
-	@media (min-width: 768px) {
-		display: none;
-	}
-`;
-
 const Results = styled.div<resultProp>`
 	margin: 20px 40px;
 	@media (max-width: 768px) {
@@ -151,6 +134,10 @@ const DiscoverWrapper = styled.div`
 	@media (max-width: 1200px) {
 		flex-direction: column;
 		padding: 10px 25px;
+	}
+
+	@media (max-width: 768px) {
+		padding: 100px 25px;
 	}
 `;
 
