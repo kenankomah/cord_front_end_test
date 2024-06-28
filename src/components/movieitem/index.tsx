@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import useFetch from "../../pages/discover/useFetch";
+import * as colors from "../../colors";
 
 export default function MovieItem({ movie }: any) {
 	const {
@@ -70,11 +71,12 @@ export default function MovieItem({ movie }: any) {
 }
 
 const ReleaseDate = styled.div`
+	color: ${colors.emeraldGreen};
 	margin-top: 20px;
 `;
 
 const Genre = styled.h3`
-	color: #000;
+	color: ${colors.emeraldGreen};
 	font-size: 12px;
 	font-weight: bold;
 `;
@@ -95,8 +97,14 @@ const MovieItemWrapper = styled.div`
 `;
 
 const Ratings = styled.div`
+	color: #fff;
 	display: inline-block;
 	margin-right: 10px;
+	background-color: ${colors.primaryColor};
+	padding: 5px;
+	font-size: 12px;
+	border-radius: 3px;
+	padding-bottom: 2px;
 `;
 
 const Title = styled.h2`
@@ -111,7 +119,7 @@ const TitleDiv = styled.div`
 	justify-content: space-between;
 	height: fit-content;
 
-	align-items: center;
+	align-items: start;
 	color: #000;
 	font-size: 20px;
 	font-weight: bold;

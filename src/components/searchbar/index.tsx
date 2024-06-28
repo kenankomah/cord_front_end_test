@@ -49,7 +49,9 @@ const SearchBarCont = styled.div`
 	justify-content: space-between;
 	flex-direction: column;
 	margin-bottom: 20px;
-	width: 90%;
+	@media (max-width: 768px) {
+		width: 90%;
+	}
 `;
 
 const InputField = styled.input<searchFieldProps>`
@@ -70,4 +72,7 @@ const InputField = styled.input<searchFieldProps>`
 		outline: none;
 	}
 	color: ${colors.fontColor};
+	@media (max-width: 768px) {
+		margin-right: 20px;
+	}
 `;

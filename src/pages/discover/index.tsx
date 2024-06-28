@@ -120,7 +120,11 @@ export default function Discover() {
 const Results = styled.div<resultProp>`
 	margin: 20px 40px;
 	@media (max-width: 768px) {
-		display: ${(props) => (props.desktop ? "none" : "inline-block")};
+		display: ${(props) => (props.desktop ? "none" : "block")};
+	}
+
+	@media (min-width: 769px) {
+		display: ${(props) => (props.desktop ? "block" : "none")};
 	}
 `;
 
