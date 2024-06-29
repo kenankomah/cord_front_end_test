@@ -32,19 +32,13 @@ interface Genre {
 interface MovieListProps {
 	movies: MovieResultsType;
 	genres: Genre[];
-	setResults: any;
+	setResults: Function;
+	unfilteredData: MovieResultsType;
 }
 
 export default function MovieList(props: MovieListProps) {
-	const { movies, setResults } = props;
+	const { movies, setResults, unfilteredData } = props;
 	const [inputValue, setInputValue] = useState("");
-	const originalMoviesRef = useRef<MovieResultsType>({ results: [] });
-
-	useEffect(() => {
-		if (movies?.results?.length === 20) {
-			originalMoviesRef.current = movies;
-		}
-	}, [movies]);
 
 	useEffect(() => {
 		const handleInputChange = (event: any) => {
@@ -60,14 +54,14 @@ export default function MovieList(props: MovieListProps) {
 	}, []);
 
 	useEffect(() => {
-		const filter = originalMoviesRef.current?.results?.filter(
+		const filter = unfilteredData?.results?.filter(
 			(movie: { title: string }) =>
 				movie.title.toLowerCase().includes(inputValue.toLowerCase())
 		);
 
-		if (originalMoviesRef.current) {
+		if (unfilteredData) {
 			const updatedMovies = {
-				...originalMoviesRef.current,
+				...unfilteredData,
 				results: filter || [],
 			};
 			setResults(updatedMovies);

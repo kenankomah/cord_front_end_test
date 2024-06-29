@@ -26,7 +26,11 @@ export default function Discover() {
 	const languagesUrl = `https://api.themoviedb.org/3/configuration/languages?api_key=${MOVIE_DATA_API_KEY}`;
 
 	const { data: genreOptions } = useFetch(genreListUrl);
-	const { data: results, setData: setResults } = useFetch(movieListUrl);
+	const {
+		data: results,
+		setData: setResults,
+		unfilteredData,
+	} = useFetch(movieListUrl);
 	const { data: languageOptions } = useFetch(languagesUrl);
 	const genres = genreOptions?.genres;
 
@@ -53,6 +57,7 @@ export default function Discover() {
 						movies={results || []}
 						genres={genreOptions || []}
 						setResults={setResults}
+						unfilteredData={unfilteredData}
 					/>
 				</MovieResults>
 			</DiscoverWrapper>
